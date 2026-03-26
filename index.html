@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nordvind Media â Analytics AI</title>
+<title>Nordvind Media - Analytics AI</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.9.0/jsrsasign-all-min.js"></script>
 <style>
@@ -21,14 +21,6 @@ header{padding:28px 0 20px;border-bottom:1px solid var(--border);margin-bottom:3
 .site-badge{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:11px;color:var(--accent);display:flex;align-items:center;gap:8px}
 .site-badge::before{content:'';width:7px;height:7px;background:var(--accent2);border-radius:50%;box-shadow:0 0 8px var(--accent2);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.api-setup{background:var(--surface);border:1px solid #4db8ff40;border-radius:14px;padding:22px;margin-bottom:28px}
-.api-setup h3{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--accent)}
-.api-setup p{font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.7}
-.api-row{display:flex;gap:10px;flex-wrap:wrap}
-.api-input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none}
-.api-input:focus{border-color:var(--accent)}
-.api-btn{background:linear-gradient(135deg,var(--accent),#2090dd);border:none;border-radius:8px;padding:10px 20px;color:#000;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
-.api-saved{display:none;background:#7fffd420;border:1px solid var(--accent2);border-radius:8px;padding:8px 14px;font-size:11px;color:var(--accent2)}
 .status-bar{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
 .status-chip{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:10px;display:flex;align-items:center;gap:7px}
 .dot{width:7px;height:7px;border-radius:50%}
@@ -69,6 +61,8 @@ header{padding:28px 0 20px;border-bottom:1px solid var(--border);margin-bottom:3
 .ok{border-color:#ffd700;color:#ffd700}
 .bad{border-color:var(--accent3);color:var(--accent3)}
 .speed-label{font-size:9px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
+.vital-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px}
 .keyword-table{width:100%;border-collapse:collapse;font-size:11px}
 .keyword-table th{text-align:left;padding:8px 10px;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:400}
 .keyword-table td{padding:10px;border-bottom:1px solid var(--border);color:var(--text)}
@@ -98,43 +92,32 @@ header{padding:28px 0 20px;border-bottom:1px solid var(--border);margin-bottom:3
 <header>
 <div class="header-inner">
 <div class="logo-area">
-<div class="logo-icon">ð¬ï¸</div>
-<div class="logo-text"><h1>NORDVIND ANALYTICS AI</h1><p>Automatiserad prestanda & insikter</p></div>
+<div class="logo-icon">&#x1F32C;&#xFE0F;</div>
+<div class="logo-text"><h1>NORDVIND ANALYTICS AI</h1><p>Automatiserad prestanda &amp; insikter</p></div>
 </div>
 <div class="site-badge">nordvindmedia.se</div>
 </div>
 </header>
-
-<div class="api-setup" id="api-setup">
-<h3>ð Koppla AI-analys (en gÃ¥ng)</h3>
-<p>Klistra in din Gemini API-nyckel frÃ¥n <strong>aistudio.google.com/apikey</strong> â den sparas lokalt i din webblÃ¤sare och anvÃ¤nds automatiskt. Gratis!</p>
-<div class="api-row">
-<input class="api-input" id="gemini-key-input" type="password" placeholder="AIza...">
-<button class="api-btn" onclick="saveKey()">Spara nyckel</button>
-<div class="api-saved" id="api-saved">â Nyckel sparad!</div>
-</div>
-</div>
-
 <div class="status-bar">
-<div class="status-chip"><div class="dot dot-loading" id="dot-ga"></div><span id="lbl-ga">Google Analytics â hÃ¤mtar...</span></div>
-<div class="status-chip"><div class="dot dot-loading" id="dot-sc"></div><span id="lbl-sc">Search Console â hÃ¤mtar...</span></div>
-<div class="status-chip"><div class="dot dot-loading" id="dot-ps"></div><span id="lbl-ps">PageSpeed â hÃ¤mtar...</span></div>
+<div class="status-chip"><div class="dot dot-loading" id="dot-ga"></div><span id="lbl-ga">Google Analytics &#x2014; hamtar...</span></div>
+<div class="status-chip"><div class="dot dot-loading" id="dot-sc"></div><span id="lbl-sc">Search Console &#x2014; hamtar...</span></div>
+<div class="status-chip"><div class="dot dot-loading" id="dot-ps"></div><span id="lbl-ps">PageSpeed &#x2014; hamtar...</span></div>
 </div>
 <div class="refresh-bar">
-<div class="last-updated">Senast uppdaterad: <span id="last-updated-time">â</span></div>
-<button class="btn-refresh" onclick="runAll()"><div class="spinner" id="spinner"></div>â» Uppdatera</button>
+<div class="last-updated">Senast uppdaterad: <span id="last-updated-time">&#x2013;</span></div>
+<button class="btn-refresh" onclick="runAll()"><div class="spinner" id="spinner"></div>&#x21BB; Uppdatera</button>
 </div>
 <div class="ai-panel">
 <div class="ai-header">
-<div class="ai-avatar">ð¤</div>
+<div class="ai-avatar">&#x1F916;</div>
 <div class="ai-header-text">
-<h3>Gemini AI â Analys av nordvindmedia.se</h3>
-<p>Automatisk insiktsanalys baserad pÃ¥ riktig live-data</p>
+<h3>Gemini AI &#x2014; Analys av nordvindmedia.se</h3>
+<p>Automatisk insiktsanalys baserad pa riktig live-data</p>
 </div>
 </div>
-<div id="ai-output"><div class="thinking"><span>HÃ¤mtar data och analyserar</span><div class="dots"><span>.</span><span>.</span><span>.</span></div></div></div>
+<div id="ai-output"><div class="thinking"><span>Hamtar data och analyserar</span><div class="dots"><span>.</span><span>.</span><span>.</span></div></div></div>
 </div>
-<div class="section-label">â¡ PageSpeed Insights</div>
+<div class="section-label">&#x26A1; PageSpeed Insights</div>
 <div class="data-card" style="margin-bottom:28px">
 <div class="speed-grid" id="speed-grid">
 <div class="speed-score skeleton" style="height:110px"></div>
@@ -144,7 +127,7 @@ header{padding:28px 0 20px;border-bottom:1px solid var(--border);margin-bottom:3
 </div>
 <div id="ps-vitals"></div>
 </div>
-<div class="section-label">ð Google Analytics 4 â Senaste 28 dagarna</div>
+<div class="section-label">&#x1F4CA; Google Analytics 4 &#x2014; Senaste 28 dagarna</div>
 <div class="metrics-grid" id="ga-grid">
 <div class="metric-card skeleton" style="height:110px"></div>
 <div class="metric-card skeleton" style="height:110px"></div>
@@ -155,58 +138,28 @@ header{padding:28px 0 20px;border-bottom:1px solid var(--border);margin-bottom:3
 </div>
 <div id="ga-error"></div>
 <div class="two-col">
-<div class="data-card"><h4>ð Search Console â ToppsÃ¶kord</h4><div id="sc-content"><div class="skeleton" style="height:220px"></div></div></div>
-<div class="data-card"><h4>ð TrafikkÃ¤llor</h4><div id="ga-sources"><div class="skeleton" style="height:220px"></div></div></div>
+<div class="data-card"><h4>&#x1F50D; Search Console &#x2014; Toppsoekord</h4><div id="sc-content"><div class="skeleton" style="height:220px"></div></div></div>
+<div class="data-card"><h4>&#x1F4CA; Trafikkallor</h4><div id="ga-sources"><div class="skeleton" style="height:220px"></div></div></div>
 </div>
 </div>
 <script>
+const GEMINI_KEY="AIzaSyBgG_DjcHd7wkSjb7yfm3nX_fhusCteiEA";
 const SA={client_email:"nordvind-analytics@snappy-catcher-490702-j5.iam.gserviceaccount.com",private_key:"-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCX0VpfCwgsFBdy\nDm7zYnpHvjUKS7mGyL5osUGsl4ATl54IPeKrrJpTaaSX4YTwF40+DvHLhL0wv4Qi\ngUM4gP8snSQkbi/e12ExcZxF9gbYLU/NoWJeIopj36xkJq2NEra2UifIhjJJQoR2\nAZ1KPUjRlYw/Nzr8zr6wgVaUMg/h3j3ws1Z4JUXkYsKtRga+9EsE8JPQtHFehW1J\n1IT2kc782Bmp/5DseOTpxv7du56iwME6s1Q4SwgW1RHzLXR2+Co0/k6aEyM5z4By\ncvbon7TBxTfZhfQWO+5U/8GjmJaw5QRYsToVm/HFEBlSqHbUrWYeVxUsvxP6BNwj\ns4urh14xAgMBAAECgf8yCJrm736bCEbeVZV+EBJHykwU21pwZLhFvXM67kPHfx+x\nz09DZjVJrGBrVKpqjE1e3h6woJmjDXsU7zb681vt7mGRML89BUQIcUHdXWnkDIVR\nI84VWW43WrH14HBR/UKeQwXZegeTBxCrvTWDBNDqK1mNOSaLFHaBJHgbzmPoBmq/\nQbbAnTDZ+aIq+rQdFYUVezpxeJAFETwDlZZQC4/QEJehsmjNFVsB/IDqJn+AYxn0\nE5y/9LmZymYHtvlOqgKaQTwJzRNrW1pD4/kttc2Dr9FaaiXW2LX0+CZMlHS05cit\nj1GnenzBP90bEWzQMBdngKXRb490X3n2vLJUiccCgYEAxhUTjh8Xe4m4fdlBQBhK\n/UVl5VK1I3+oJFVTmabg88gskg+4zKrRXPioFv6PCO8aYPMZqNxHz9WtRtA8FnM7\n8tg+xLOCM2ievlon8By92ZGa8ES8n9fUIKNcBDG1pEuBHgPyCLV7YVeuvSKlYhCb\n1dg/74SLne9ijCdOxpNtk0MCgYEAxDVEiwqNmZSrkV9Rnc1ds5y1uzAVtrZ/PieD\nx0dO0kUsHVW4sO98tT7Gz8QfygLB5mc/9YAE0DEURVCkDBakwoZ9aTeoZyJDuMDy\nX/dBn8zbgIRyt6uXJQfmTXvPX68NlW4F2Q/fOkxGODc2CubiS0LnKp7pKRD4iWgf\nOHS5n3sCgYA0rBgWG7hv1lBjzqimNY+DR7fvwg1+0gxRFQt0+UYqLRmFAX8/lVC0\n6z4vVyOL2aDnFN3G5ESIRKaeBPNleOEBE3WlcqJ1ryU/MtQZ6lqlhy1vJKgPzSGQ\nSEBIsTs+5AECjUQIAtI7MUi67IKT0BzQQX/G3jUOG0DWSgGNllh15wKBgEA6I6bU\nHIgSp5rdtezPBgY+nSqaUfFOihaBftyj1gR0yj0MC3o32v3Ff/URAUryXiCa2c/2\nSR0Rg84w2JJwcxyOQ81Gf+TKzZpT5sNNP/kcaRoHwTmofMCNdnEUv0xWFD8/FcD5\nNhxyTWYnhJRLAfaa/urvu+lKeeEY6WdkpkKzAoGBALvLZDu6KO4uSrZVubO8na6l\nOa5A6gJmebQ5OvfKEolCZ2E99CpPje1YuzyVG/Xd/iWFJJE6O3JIFuxbYpcfa72m\nArqbqn3clnzMX5Ogq8ZcI8kAB+tbMppDn+kEES6ADVb8MKr8txQgS03gSzaa2XvN\n3ok4Q+1/4/d0ifPHhpd7\n-----END PRIVATE KEY-----\n",token_uri:"https://oauth2.googleapis.com/token"};
 const GA4_PROPERTY="529022482",SC_SITE="https://www.nordvindmedia.se/",PS_URL="https://nordvindmedia.se";
 let cachedTokens={},appData={};
-
-function saveKey(){
-  const k=document.getElementById('gemini-key-input').value.trim();
-  if(!k){alert('Klistra in din API-nyckel!');return;}
-  localStorage.setItem('gemini_key',k);
-  document.getElementById('api-saved').style.display='block';
-  document.getElementById('api-setup').style.borderColor='var(--accent2)';
-  setTimeout(()=>runAI(),500);
-}
-
-function getGeminiKey(){return localStorage.getItem('gemini_key')||'';}
-
-function b64url(s){return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'')}
+function b64url(s){return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=/g,"")}
 async function getToken(scope){const now=Math.floor(Date.now()/1000);if(cachedTokens[scope]&&now<cachedTokens[scope].exp-60)return cachedTokens[scope].token;const hdr=b64url(JSON.stringify({alg:"RS256",typ:"JWT"}));const pay=b64url(JSON.stringify({iss:SA.client_email,scope,aud:SA.token_uri,exp:now+3600,iat:now}));const input=hdr+"."+pay;const sig=new KJUR.crypto.Signature({alg:"SHA256withRSA"});sig.init(SA.private_key);sig.updateString(input);const hex=sig.sign();const bytes=hex.match(/.{2}/g).map(b=>parseInt(b,16));const sigB64=b64url(String.fromCharCode(...bytes));const jwt=input+"."+sigB64;const res=await fetch(SA.token_uri,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion="+jwt});const d=await res.json();if(!d.access_token)throw new Error("Token fel: "+JSON.stringify(d).substring(0,100));cachedTokens[scope]={token:d.access_token,exp:now+(d.expires_in||3600)};return d.access_token}
-function setStatus(k,s,l){document.getElementById('dot-'+k).className='dot '+(s==='loading'?'dot-loading':s==='ok'?'dot-ok':'dot-err');document.getElementById('lbl-'+k).textContent=l}
-function scoreClass(n){return n>=90?'good':n>=50?'ok':'bad'}
-async function fetchPageSpeed(){setStatus('ps','loading','PageSpeed â hÃ¤mtar...');try{const base="https://www.googleapis.com/pagespeedonline/v5/runPagespeed";const[mr,dr]=await Promise.all([fetch(base+"?url="+encodeURIComponent(PS_URL)+"&strategy=mobile"),fetch(base+"?url="+encodeURIComponent(PS_URL)+"&strategy=desktop")]);const mob=await mr.json(),desk=await dr.json();const sc=(cat,d)=>Math.round((d.lighthouseResult?.categories?.[cat]?.score||0)*100);const mt=(k,d)=>d.lighthouseResult?.audits?.[k]?.displayValue||'â';appData.ps={mobile:{performance:sc('performance',mob),accessibility:sc('accessibility',mob),bestPractices:sc('best-practices',mob),seo:sc('seo',mob)},desktop:{performance:sc('performance',desk),accessibility:sc('accessibility',desk),bestPractices:sc('best-practices',desk),seo:sc('seo',desk)},lcp:mt('largest-contentful-paint',mob),tbt:mt('total-blocking-time',mob),cls:mt('cumulative-layout-shift',mob),fcp:mt('first-contentful-paint',mob),ttfb:mt('server-response-time',mob),tti:mt('interactive',mob)};setStatus('ps','ok','PageSpeed â');renderPS(appData.ps)}catch(e){setStatus('ps','err','PageSpeed â fel');document.getElementById('speed-grid').innerHTML='<div class="error-msg" style="grid-column:1/-1">â ï¸ PageSpeed: '+e.message+'</div>'}}
-async function fetchGA4(){setStatus('ga','loading','Google Analytics â hÃ¤mtar...');try{const token=await getToken("https://www.googleapis.com/auth/analytics.readonly");const call=body=>fetch("https://analyticsdata.googleapis.com/v1beta/properties/"+GA4_PROPERTY+":runReport",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify(body)}).then(r=>r.json());const[main,src]=await Promise.all([call({dateRanges:[{startDate:"28daysAgo",endDate:"today"}],metrics:[{name:"sessions"},{name:"totalUsers"},{name:"screenPageViews"},{name:"bounceRate"},{name:"averageSessionDuration"},{name:"newUsers"}]}),call({dateRanges:[{startDate:"28daysAgo",endDate:"today"}],dimensions:[{name:"sessionDefaultChannelGroup"}],metrics:[{name:"sessions"}],orderBys:[{metric:{metricName:"sessions"},desc:true}],limit:6})]);if(main.error)throw new Error(main.error.message);const v=main.rows?.[0]?.metricValues||[];const sessions=parseInt(v[0]?.value||0);const dur=parseInt(v[4]?.value||0);appData.ga={sessions,users:parseInt(v[1]?.value||0),pageviews:parseInt(v[2]?.value||0),bounceRate:Math.round(parseFloat(v[3]?.value||0)*100)+"%",avgDuration:Math.floor(dur/60)+"m "+dur%60+"s",newUsers:parseInt(v[5]?.value||0),sources:(src.rows||[]).map(r=>({name:r.dimensionValues[0].value,sessions:parseInt(r.metricValues[0].value),pct:Math.round(parseInt(r.metricValues[0].value)/Math.max(sessions,1)*100)+"%"}))};setStatus('ga','ok','Google Analytics â');renderGA4(appData.ga)}catch(e){setStatus('ga','err','GA4 â fel');document.getElementById('ga-error').innerHTML='<div class="error-msg">â ï¸ GA4: '+e.message+'</div>';document.getElementById('ga-grid').innerHTML=''}}
-async function fetchSC(){setStatus('sc','loading','Search Console â hÃ¤mtar...');try{const token=await getToken("https://www.googleapis.com/auth/webmasters.readonly");const today=new Date(),end=today.toISOString().split('T')[0],start=new Date(today-28*864e5).toISOString().split('T')[0];const call=body=>fetch("https://www.googleapis.com/webmasters/v3/sites/"+encodeURIComponent(SC_SITE)+"/searchAnalytics/query",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify(body)}).then(r=>r.json());const[ov,kw]=await Promise.all([call({startDate:start,endDate:end,rowLimit:1}),call({startDate:start,endDate:end,dimensions:["query"],rowLimit:8,orderBy:[{fieldName:"clicks",sortOrder:"DESCENDING"}]})]);if(ov.error)throw new Error(ov.error.message);const r=ov.rows?.[0]||{};appData.sc={clicks:Math.round(r.clicks||0),impressions:Math.round(r.impressions||0),ctr:((r.ctr||0)*100).toFixed(1)+"%",avgPosition:(r.position||0).toFixed(1),keywords:(kw.rows||[]).map(r=>({query:r.keys[0],clicks:Math.round(r.clicks),impressions:Math.round(r.impressions),ctr:(r.ctr*100).toFixed(1)+"%",pos:Math.round(r.position)}))};setStatus('sc','ok','Search Console â');renderSC(appData.sc)}catch(e){setStatus('sc','err','Search Console â fel');document.getElementById('sc-content').innerHTML='<div class="error-msg">â ï¸ SC: '+e.message+'</div>'}}
-function renderPS(d){const cats=[{key:'performance',label:'Prestanda (mob)'},{key:'accessibility',label:'TillgÃ¤nglighet'},{key:'bestPractices',label:'Best Practices'},{key:'seo',label:'SEO'}];document.getElementById('speed-grid').innerHTML=cats.map(c=>'<div class="speed-score fade-in"><div class="score-circle '+scoreClass(d.mobile[c.key])+'">'+d.mobile[c.key]+'</div><div class="speed-label">'+c.label+'</div></div>').join('');document.getElementById('ps-vitals').innerHTML='<div style="margin-top:14px"><div class="section-label" style="margin-bottom:10px">Core Web Vitals â Mobil</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px">'+[{l:'LCP',v:d.lcp},{l:'TBT',v:d.tbt},{l:'CLS',v:d.cls},{l:'FCP',v:d.fcp},{l:'TTFB',v:d.ttfb},{l:'TTI',v:d.tti}].map(m=>'<div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px"><div class="metric-label">'+m.l+'</div><div style="font-family:Syne,sans-serif;font-size:16px;font-weight:700;color:var(--accent)">'+m.v+'</div></div>').join('')+'</div></div>'}
-function renderGA4(d){document.getElementById('ga-grid').innerHTML=[{l:'Sessioner',v:d.sessions.toLocaleString('sv'),c:'blue'},{l:'Unika anvÃ¤ndare',v:d.users.toLocaleString('sv'),c:'green'},{l:'Sidvisningar',v:d.pageviews.toLocaleString('sv'),c:'blue'},{l:'Avvisningsfrekvens',v:d.bounceRate,c:'red'},{l:'Snitt tid/session',v:d.avgDuration,c:'green'},{l:'Nya besÃ¶kare',v:d.newUsers.toLocaleString('sv'),c:'blue'}].map(m=>'<div class="metric-card fade-in"><div class="metric-label">'+m.l+'</div><div class="metric-value '+m.c+'">'+m.v+'</div></div>').join('');document.getElementById('ga-sources').innerHTML=d.sources.length?d.sources.map(s=>'<div class="data-row"><span class="data-row-key">'+s.name+'</span><span><span style="color:var(--accent);font-weight:600">'+s.sessions+'</span> <span style="color:var(--muted)">'+s.pct+'</span></span></div>').join(''):'<div style="color:var(--muted);font-size:11px;padding:12px 0">Ingen data</div>'}
-function renderSC(d){const pc=p=>p<=1?'pos-1':p<=5?'pos-good':p<=10?'pos-ok':'pos-bad';document.getElementById('sc-content').innerHTML='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">'+[{l:'Klick',v:d.clicks.toLocaleString('sv'),c:'var(--accent)'},{l:'Visningar',v:d.impressions.toLocaleString('sv'),c:'var(--text)'},{l:'CTR',v:d.ctr,c:'var(--accent2)'},{l:'Snittpos.',v:d.avgPosition,c:'var(--text)'}].map(m=>'<div style="text-align:center;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px"><div style="font-family:Syne,sans-serif;font-size:20px;font-weight:800;color:'+m.c+'">'+m.v+'</div><div class="metric-label">'+m.l+'</div></div>').join('')+'</div>'+(d.keywords.length?'<table class="keyword-table"><thead><tr><th>SÃ¶kord</th><th>Pos</th><th>Klick</th><th>CTR</th></tr></thead><tbody>'+d.keywords.map(k=>'<tr><td>'+k.query+'</td><td><span class="pos-badge '+pc(k.pos)+'">'+k.pos+'</span></td><td style="color:var(--accent)">'+k.clicks+'</td><td style="color:var(--muted)">'+k.ctr+'</td></tr>').join('')+'</tbody></table>':'<div style="color:var(--muted);font-size:11px">Inga sÃ¶kord</div>')}
-async function runAI(){
-  const out=document.getElementById('ai-output');
-  const key=getGeminiKey();
-  if(!key){out.innerHTML='<div style="color:var(--muted);font-size:11px">ð Klistra in din Gemini API-nyckel ovan fÃ¶r att aktivera AI-analys. HÃ¤mta den gratis pÃ¥ <a href=\'https://aistudio.google.com/apikey\' target=\'_blank\' style=\'color:var(--accent)\'>aistudio.google.com/apikey</a></div>';return;}
-  out.innerHTML='<div class="thinking"><span>Gemini analyserar din data</span><div class="dots"><span>.</span><span>.</span><span>.</span></div></div>';
-  const{ga,sc,ps}=appData;
-  const prompt="Analysera RIKTIG data fÃ¶r nordvindmedia.se pÃ¥ svenska.\n\nPAGESPEED: Mobil "+(ps?.mobile?.performance??'â')+"/100, Desktop "+(ps?.desktop?.performance??'â')+"/100, SEO "+(ps?.mobile?.seo??'â')+"/100, LCP "+(ps?.lcp??'â')+"\nGA4 (28 dagar): Sessioner "+(ga?.sessions??'ej tillgÃ¤nglig')+", AnvÃ¤ndare "+(ga?.users??'â')+", Bounce "+(ga?.bounceRate??'â')+", Tid "+(ga?.avgDuration??'â')+(ga?.sources?", Trafik: "+ga.sources.map(s=>s.name+" "+s.pct).join(", "):"")+"\nSEARCH CONSOLE: Klick "+(sc?.clicks??'ej tillgÃ¤nglig')+", CTR "+(sc?.ctr??'â')+", Snittpos "+(sc?.avgPosition??'â')+(sc?.keywords?.length?", ToppsÃ¶kord: "+sc.keywords.slice(0,4).map(k=>k.query+" pos"+k.pos).join(", "):"")+"\n\nGe: 1.ð¯ SAMMANFATTNING 2.â STYRKOR 3.â ï¸ FÃRBÃTTRINGAR 4.ð TOPP 3 ÃTGÃRDER. Max 300 ord.";
-  try{
-    const res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+key,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
-    const data=await res.json();
-    const text=data.candidates?.[0]?.content?.parts?.[0]?.text||data.error?.message||'Kunde inte generera analys.';
-    out.innerHTML='<div class="fade-in" style="white-space:pre-wrap;font-size:12px;line-height:1.9">'+text+'</div>';
-  }catch(e){out.innerHTML='<div class="error-msg">â ï¸ AI-fel: '+e.message+'</div>'}
-}
-async function runAll(){document.getElementById('spinner').classList.add('active');cachedTokens={};await Promise.allSettled([fetchPageSpeed(),fetchGA4(),fetchSC()]);document.getElementById('last-updated-time').textContent=new Date().toLocaleString('sv-SE');await runAI();document.getElementById('spinner').classList.remove('active')}
-
-// Check if key already saved
-window.addEventListener('load',()=>{
-  const k=getGeminiKey();
-  if(k){document.getElementById('api-setup').style.borderColor='var(--accent2)';document.getElementById('api-saved').style.display='block';}
-  runAll();
-});
+function setStatus(k,s,l){document.getElementById("dot-"+k).className="dot "+(s==="loading"?"dot-loading":s==="ok"?"dot-ok":"dot-err");document.getElementById("lbl-"+k).textContent=l}
+function scoreClass(n){return n>=90?"good":n>=50?"ok":"bad"}
+async function fetchPageSpeed(){setStatus("ps","loading","PageSpeed - hamtar...");try{const base="https://www.googleapis.com/pagespeedonline/v5/runPagespeed";const[mr,dr]=await Promise.all([fetch(base+"?url="+encodeURIComponent(PS_URL)+"&strategy=mobile"),fetch(base+"?url="+encodeURIComponent(PS_URL)+"&strategy=desktop")]);const mob=await mr.json(),desk=await dr.json();if(mob.error)throw new Error(mob.error.message);const sc=(cat,d)=>Math.round((d.lighthouseResult?.categories?.[cat]?.score||0)*100);const mt=(k,d)=>d.lighthouseResult?.audits?.[k]?.displayValue||"-";appData.ps={mobile:{performance:sc("performance",mob),accessibility:sc("accessibility",mob),bestPractices:sc("best-practices",mob),seo:sc("seo",mob)},desktop:{performance:sc("performance",desk),accessibility:sc("accessibility",desk),bestPractices:sc("best-practices",desk),seo:sc("seo",desk)},lcp:mt("largest-contentful-paint",mob),tbt:mt("total-blocking-time",mob),cls:mt("cumulative-layout-shift",mob),fcp:mt("first-contentful-paint",mob),ttfb:mt("server-response-time",mob),tti:mt("interactive",mob)};setStatus("ps","ok","PageSpeed klar!");renderPS(appData.ps)}catch(e){setStatus("ps","err","PageSpeed - fel: "+e.message.substring(0,30));document.getElementById("speed-grid").innerHTML="<div class='error-msg' style='grid-column:1/-1'>PageSpeed fel: "+e.message+"</div>"}}
+async function fetchGA4(){setStatus("ga","loading","Google Analytics - hamtar...");try{const token=await getToken("https://www.googleapis.com/auth/analytics.readonly");const call=body=>fetch("https://analyticsdata.googleapis.com/v1beta/properties/"+GA4_PROPERTY+":runReport",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify(body)}).then(r=>r.json());const[main,src]=await Promise.all([call({dateRanges:[{startDate:"28daysAgo",endDate:"today"}],metrics:[{name:"sessions"},{name:"totalUsers"},{name:"screenPageViews"},{name:"bounceRate"},{name:"averageSessionDuration"},{name:"newUsers"}]}),call({dateRanges:[{startDate:"28daysAgo",endDate:"today"}],dimensions:[{name:"sessionDefaultChannelGroup"}],metrics:[{name:"sessions"}],orderBys:[{metric:{metricName:"sessions"},desc:true}],limit:6})]);if(main.error)throw new Error(main.error.message);const v=main.rows?.[0]?.metricValues||[];const sessions=parseInt(v[0]?.value||0);const dur=parseInt(v[4]?.value||0);appData.ga={sessions,users:parseInt(v[1]?.value||0),pageviews:parseInt(v[2]?.value||0),bounceRate:Math.round(parseFloat(v[3]?.value||0)*100)+"%",avgDuration:Math.floor(dur/60)+"m "+dur%60+"s",newUsers:parseInt(v[5]?.value||0),sources:(src.rows||[]).map(r=>({name:r.dimensionValues[0].value,sessions:parseInt(r.metricValues[0].value),pct:Math.round(parseInt(r.metricValues[0].value)/Math.max(sessions,1)*100)+"%"}))};setStatus("ga","ok","Google Analytics klar!");renderGA4(appData.ga)}catch(e){setStatus("ga","err","GA4 - fel");document.getElementById("ga-error").innerHTML="<div class='error-msg'>GA4: "+e.message+"</div>";document.getElementById("ga-grid").innerHTML=""}}
+async function fetchSC(){setStatus("sc","loading","Search Console - hamtar...");try{const token=await getToken("https://www.googleapis.com/auth/webmasters.readonly");const today=new Date(),end=today.toISOString().split("T")[0],start=new Date(today-28*864e5).toISOString().split("T")[0];const call=body=>fetch("https://www.googleapis.com/webmasters/v3/sites/"+encodeURIComponent(SC_SITE)+"/searchAnalytics/query",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify(body)}).then(r=>r.json());const[ov,kw]=await Promise.all([call({startDate:start,endDate:end,rowLimit:1}),call({startDate:start,endDate:end,dimensions:["query"],rowLimit:8,orderBy:[{fieldName:"clicks",sortOrder:"DESCENDING"}]})]);if(ov.error)throw new Error(ov.error.message);const r=ov.rows?.[0]||{};appData.sc={clicks:Math.round(r.clicks||0),impressions:Math.round(r.impressions||0),ctr:((r.ctr||0)*100).toFixed(1)+"%",avgPosition:(r.position||0).toFixed(1),keywords:(kw.rows||[]).map(r=>({query:r.keys[0],clicks:Math.round(r.clicks),impressions:Math.round(r.impressions),ctr:(r.ctr*100).toFixed(1)+"%",pos:Math.round(r.position)}))};setStatus("sc","ok","Search Console klar!");renderSC(appData.sc)}catch(e){setStatus("sc","err","Search Console - fel");document.getElementById("sc-content").innerHTML="<div class='error-msg'>SC: "+e.message+"</div>"}}
+function renderPS(d){const cats=[{key:"performance",label:"Prestanda (mob)"},{key:"accessibility",label:"Tillganglighet"},{key:"bestPractices",label:"Best Practices"},{key:"seo",label:"SEO"}];document.getElementById("speed-grid").innerHTML=cats.map(c=>"<div class='speed-score fade-in'><div class='score-circle "+scoreClass(d.mobile[c.key])+"'> "+d.mobile[c.key]+"</div><div class='speed-label'>"+c.label+"</div></div>").join("");document.getElementById("ps-vitals").innerHTML="<div style='margin-top:14px'><div class='section-label' style='margin-bottom:10px'>Core Web Vitals - Mobil</div><div class='vitals-grid'>"+[{l:"LCP",v:d.lcp},{l:"TBT",v:d.tbt},{l:"CLS",v:d.cls},{l:"FCP",v:d.fcp},{l:"TTFB",v:d.ttfb},{l:"TTI",v:d.tti}].map(m=>"<div class='vital-card'><div class='metric-label'>"+m.l+"</div><div style='font-family:Syne,sans-serif;font-size:16px;font-weight:700;color:var(--accent)'>"+m.v+"</div></div>").join("")+"</div><div style='margin-top:12px;display:flex;gap:10px;flex-wrap:wrap'>"+cats.map(c=>"<div style='background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:11px'><span style='color:var(--muted)'>"+c.label+" desktop: </span><span style='color:"+(d.desktop[c.key]>=90?"var(--accent2)":d.desktop[c.key]>=50?"#ffd700":"var(--accent3)")+";font-weight:600'>"+d.desktop[c.key]+"</span></div>").join("")+"</div></div>"}
+function renderGA4(d){document.getElementById("ga-grid").innerHTML=[{l:"Sessioner",v:d.sessions.toLocaleString("sv"),c:"blue"},{l:"Unika anvandare",v:d.users.toLocaleString("sv"),c:"green"},{l:"Sidvisningar",v:d.pageviews.toLocaleString("sv"),c:"blue"},{l:"Avvisningsfrekvens",v:d.bounceRate,c:"red"},{l:"Snitt tid/session",v:d.avgDuration,c:"green"},{l:"Nya besokare",v:d.newUsers.toLocaleString("sv"),c:"blue"}].map(m=>"<div class='metric-card fade-in'><div class='metric-label'>"+m.l+"</div><div class='metric-value "+m.c+"'>"+m.v+"</div></div>").join("");document.getElementById("ga-sources").innerHTML=d.sources.length?d.sources.map(s=>"<div class='data-row'><span class='data-row-key'>"+s.name+"</span><span><span style='color:var(--accent);font-weight:600'>"+s.sessions+"</span> <span style='color:var(--muted)'>"+s.pct+"</span></span></div>").join(""):"<div style='color:var(--muted);font-size:11px;padding:12px 0'>Ingen data</div>"}
+function renderSC(d){const pc=p=>p<=1?"pos-1":p<=5?"pos-good":p<=10?"pos-ok":"pos-bad";document.getElementById("sc-content").innerHTML="<div style='display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px'>"+[{l:"Klick",v:d.clicks.toLocaleString("sv"),c:"var(--accent)"},{l:"Visningar",v:d.impressions.toLocaleString("sv"),c:"var(--text)"},{l:"CTR",v:d.ctr,c:"var(--accent2)"},{l:"Snittpos.",v:d.avgPosition,c:"var(--text)"}].map(m=>"<div style='text-align:center;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px'><div style='font-family:Syne,sans-serif;font-size:20px;font-weight:800;color:"+m.c+"'>"+m.v+"</div><div class='metric-label'>"+m.l+"</div></div>").join("")+"</div>"+(d.keywords.length?"<table class='keyword-table'><thead><tr><th>Sokord</th><th>Pos</th><th>Klick</th><th>CTR</th></tr></thead><tbody>"+d.keywords.map(k=>"<tr><td>"+k.query+"</td><td><span class='pos-badge "+pc(k.pos)+"'>"+k.pos+"</span></td><td style='color:var(--accent)'>"+k.clicks+"</td><td style='color:var(--muted)'>"+k.ctr+"</td></tr>").join("")+"</tbody></table>":"<div style='color:var(--muted);font-size:11px'>Inga sokord</div>")}
+async function runAI(){const out=document.getElementById("ai-output");out.innerHTML="<div class='thinking'><span>Gemini analyserar din data</span><div class='dots'><span>.</span><span>.</span><span>.</span></div></div>";const{ga,sc,ps}=appData;const prompt="Analysera RIKTIG data for nordvindmedia.se pa svenska.\n\nPAGESPEED: Mobil "+(ps?.mobile?.performance??"-")+"/100, Desktop "+(ps?.desktop?.performance??"-")+"/100, SEO "+(ps?.mobile?.seo??"-")+"/100, LCP "+(ps?.lcp??"-")+"\nGA4 (28 dagar): Sessioner "+(ga?.sessions??"-")+", Anvandare "+(ga?.users??"-")+", Bounce "+(ga?.bounceRate??"-")+", Tid "+(ga?.avgDuration??"-")+(ga?.sources?", Trafik: "+ga.sources.map(s=>s.name+" "+s.pct).join(", "):"")+"\nSEARCH CONSOLE: Klick "+(sc?.clicks??"-")+", CTR "+(sc?.ctr??"-")+", Snittpos "+(sc?.avgPosition??"-")+(sc?.keywords?.length?", Toppsoekord: "+sc.keywords.slice(0,4).map(k=>k.query+" pos"+k.pos).join(", "):"")+"\n\nGe: 1. SAMMANFATTNING 2. STYRKOR 3. FORBATTRINGAR 4. TOPP 3 ATGARDER. Max 300 ord.";try{const res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key="+GEMINI_KEY,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});const data=await res.json();const text=data.candidates?.[0]?.content?.parts?.[0]?.text||data.error?.message||"Kunde inte generera analys.";out.innerHTML="<div class='fade-in' style='white-space:pre-wrap;font-size:12px;line-height:1.9'>"+text+"</div>"}catch(e){out.innerHTML="<div class='error-msg'>AI-fel: "+e.message+"</div>"}}
+async function runAll(){document.getElementById("spinner").classList.add("active");cachedTokens={};await Promise.allSettled([fetchPageSpeed(),fetchGA4(),fetchSC()]);document.getElementById("last-updated-time").textContent=new Date().toLocaleString("sv-SE");await runAI();document.getElementById("spinner").classList.remove("active")}
+window.addEventListener("load",runAll);
 </script>
 </body>
 </html>
